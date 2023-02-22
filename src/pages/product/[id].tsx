@@ -1,3 +1,4 @@
+import { Button } from "@/src/components/Button"
 import { stripe } from "@/src/lib/stripe"
 import axios from "axios"
 import { GetStaticPaths, GetStaticProps } from "next"
@@ -25,6 +26,7 @@ export default function Product({product}: ProductProps) {
     const [ isCreatingCheckoutSession, setIsCreatingCheckoutSession] = useState(false)
     
     async function handleBuyProduct(){
+      console.log('Entrei aqui')
       try {
         setIsCreatingCheckoutSession(true)
         const response = await axios.post('/api/checkout', {
@@ -58,7 +60,7 @@ export default function Product({product}: ProductProps) {
 
             <p>{product.description}</p>
 
-            <button disabled={isCreatingCheckoutSession} onClick={handleBuyProduct}>Comprar agora</button>
+            <Button title="Colocar na sacola" disabled={isCreatingCheckoutSession} onClick={handleBuyProduct}>Comprar agora</Button>
           </ProductDetails>
         </ProductContainer>
       </>

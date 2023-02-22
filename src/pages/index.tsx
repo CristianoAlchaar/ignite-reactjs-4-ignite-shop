@@ -10,6 +10,7 @@ import { HomeContainer, Product } from "../styles/pages/home"
 import { CheckoutButton } from "../components/CheckoutButton"
 import 'keen-slider/keen-slider.min.css'
 import Stripe from "stripe"
+import { Checkout } from "../components/Checkout"
 
 interface HomeProps{
   products: {
@@ -33,7 +34,7 @@ export default function Home({ products }: HomeProps) {
       <Head>
         <title>Home IgniteShop</title>
       </Head>
-    
+      <Checkout />
       <HomeContainer ref={sliderRef} className="keen-slider">
         {products.map(product => {
           return (
