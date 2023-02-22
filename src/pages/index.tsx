@@ -7,7 +7,7 @@ import { useKeenSlider } from 'keen-slider/react'
 
 import { stripe } from "../lib/stripe"
 import { HomeContainer, Product } from "../styles/pages/home"
-
+import { CheckoutButton } from "../components/CheckoutButton"
 import 'keen-slider/keen-slider.min.css'
 import Stripe from "stripe"
 
@@ -41,8 +41,11 @@ export default function Home({ products }: HomeProps) {
               <Product className="keen-slider__slide">
                 <Image src={product.imageUrl} width={520} height={480} alt=""/>
                 <footer>
-                  <strong>{product.name}</strong>
-                  <span>{product.price}</span>
+                  <div>
+                    <strong>{product.name}</strong>
+                    <span>{product.price}</span>
+                  </div>
+                  <CheckoutButton variant="secondary" size="lg"/>
                 </footer>
               </Product>
             </Link>
