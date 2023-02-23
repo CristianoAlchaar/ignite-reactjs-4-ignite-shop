@@ -26,7 +26,6 @@ export default function Product({product}: ProductProps) {
     const [ isCreatingCheckoutSession, setIsCreatingCheckoutSession] = useState(false)
     
     async function handleBuyProduct(){
-      console.log('Entrei aqui')
       try {
         setIsCreatingCheckoutSession(true)
         const response = await axios.post('/api/checkout', {

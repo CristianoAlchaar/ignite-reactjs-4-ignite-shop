@@ -1,7 +1,8 @@
 import { MouseEvent } from 'react'
 import { RxCross1 } from 'react-icons/rx'
 import { Button } from '../components/Button'
-import { CheckoutContainer, ExitButton, NumberItens, TotalPrice, TotalPriceValue } from '../styles/components/Checkout'
+import { CheckoutContainer, ContainerOfSmallCard, ExitButton, NumberItens, TotalPrice, TotalPriceValue } from '../styles/components/Checkout'
+import { SmallProducCard } from './SmallProductCard'
 
 export function Checkout(){
     function handleExitClick(){
@@ -14,6 +15,17 @@ export function Checkout(){
             <header>
                 <h3>Sacola de Compras</h3>    
             </header>
+            <ContainerOfSmallCard>
+                <SmallProducCard />
+                <SmallProducCard />
+                <SmallProducCard />
+                <SmallProducCard />
+                <SmallProducCard />
+                <SmallProducCard />
+                <SmallProducCard />
+                <SmallProducCard />
+                <SmallProducCard />
+            </ContainerOfSmallCard>
             <footer>
                 <div>
                     <p>Quantidade</p>

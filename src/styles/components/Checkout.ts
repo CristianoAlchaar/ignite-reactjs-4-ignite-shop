@@ -3,7 +3,7 @@ import { RxCross1 } from 'react-icons/rx'
 
 export const CheckoutContainer = styled('div',{
     height: '100%',
-    width: '30rem',
+    width: '29,6875rem',
     backgroundColor: '$gray800',
     position: 'absolute',
     right: 0,
@@ -70,4 +70,29 @@ export const TotalPrice = styled('span',{
 export const TotalPriceValue = styled('span',{
     fontSize: '$xl',
     fontWeight: 'bold'
+})
+
+export const ContainerOfSmallCard = styled('div',{
+    flex: 1,
+    display: 'flex',
+    flexDirection: 'column',
+    gap: "1.5rem",
+    overflowY: 'auto',
+    overflowX: 'hidden',
+    
+    '&::-webkit-scrollbar': {
+        width: '5px',
+        height: '10px',
+    },
+    '&::-webkit-scrollbar-track': {
+        background: '#f1f1f1',
+        borderRadius: '5px',
+    },
+    '&::-webkit-scrollbar-thumb': {
+        background: '$green300',
+        borderRadius: '5px',
+    },
+    '&::-webkit-scrollbar-thumb:hover': {
+        background: '$green500',
+    }
 })
