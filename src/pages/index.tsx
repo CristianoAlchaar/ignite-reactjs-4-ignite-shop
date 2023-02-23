@@ -10,7 +10,6 @@ import { HomeContainer, Product } from "../styles/pages/home"
 import { CheckoutButton } from "../components/CheckoutButton"
 import 'keen-slider/keen-slider.min.css'
 import Stripe from "stripe"
-import { Checkout } from "../components/Checkout"
 
 interface HomeProps{
   products: {
@@ -29,12 +28,15 @@ export default function Home({ products }: HomeProps) {
     }
   })
 
+  function handleAddNewProduct(){
+    console.log('Adicionar')
+  }
+
   return (
     <>
       <Head>
         <title>Home IgniteShop</title>
       </Head>
-      <Checkout />
       <HomeContainer ref={sliderRef} className="keen-slider">
         {products.map(product => {
           return (
@@ -46,7 +48,7 @@ export default function Home({ products }: HomeProps) {
                     <strong>{product.name}</strong>
                     <span>{product.price}</span>
                   </div>
-                  <CheckoutButton variant="secondary" size="lg"/>
+                  <CheckoutButton variant="secondary" size="lg" onClick={handleAddNewProduct}/>
                 </footer>
               </Product>
             </Link>

@@ -1,18 +1,17 @@
 import { MouseEvent, useState } from 'react'
-import { RxCross1 } from 'react-icons/rx'
 import { Button } from '../components/Button'
 import { CheckoutContainer, ContainerOfSmallCard, ExitButton, NumberItens, TotalPrice, TotalPriceValue } from '../styles/components/Checkout'
 import { SmallProducCard } from './SmallProductCard'
 
-export function Checkout(){
-    const [isToggled, setIsToggle] = useState(false)
+interface CheckoutProps{
+    isToggled?: boolean
+    onClick: () => void;
+}
 
-    function toggleCheckout(){
-        isToggled ? setIsToggle(false) : setIsToggle(true)
-    }
-
+export function Checkout({ isToggled = false, onClick } : CheckoutProps){
+    
     function handleExitClick(){
-        toggleCheckout()
+        onClick()
     }
 
     return(
