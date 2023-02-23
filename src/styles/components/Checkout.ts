@@ -1,4 +1,4 @@
-import { styled } from '../index'
+import { styled, css } from '../index'
 import { RxCross1 } from 'react-icons/rx'
 
 export const CheckoutContainer = styled('div',{
@@ -6,7 +6,7 @@ export const CheckoutContainer = styled('div',{
     width: '29,6875rem',
     backgroundColor: '$gray800',
     position: 'absolute',
-    right: 0,
+    right: '0',
     zIndex: 1000,
     boxShadow: '-4px 0px 30px rgba(0, 0, 0, 0.8)',
     cursor: 'default',
@@ -14,6 +14,7 @@ export const CheckoutContainer = styled('div',{
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between',
+    transition: 'right 0.5s ease-out',
 
     h3:{
         fontSize: '$lg'
