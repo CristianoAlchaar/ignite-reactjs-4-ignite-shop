@@ -24,6 +24,11 @@ export const CardPrice = styled("span", {
     fontWeight: "bold",    
 })
 
+export const QuantityP = styled("p", {
+    fontSize: "0.9rem",
+    color: '$gray300'
+})
+
 export const RemoveSpn = styled("span", {
     color: "$green500",
     fontWeight: "bold",   

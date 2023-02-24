@@ -1,6 +1,6 @@
 import Image from "next/image"
 import shirtImg from "../assets/tshirt.png"
-import { CardContainer, CardPrice, RemoveSpn } from "../styles/components/SmallProductCard"
+import { CardContainer, CardPrice, QuantityP, RemoveSpn } from "../styles/components/SmallProductCard"
 
 export function SmallProducCard(){
     return (
@@ -14,6 +14,7 @@ export function SmallProducCard(){
             }}/>
             <div>
                 <h4>Camiseta beyond the Limits</h4>
+                <QuantityP>Quantidade: 3</QuantityP>
                 <CardPrice>R$ 79,90</CardPrice>
                 <RemoveSpn>Remover</RemoveSpn>
             </div>
