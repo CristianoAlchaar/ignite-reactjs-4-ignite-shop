@@ -10,6 +10,7 @@ import { HomeContainer, Product } from "../styles/pages/home"
 import { CheckoutButton } from "../components/CheckoutButton"
 import 'keen-slider/keen-slider.min.css'
 import Stripe from "stripe"
+import { useShoppingCart } from "use-shopping-cart"
 
 interface HomeProps{
   products: {
@@ -20,7 +21,16 @@ interface HomeProps{
   }[]
 }
 
+interface Product{
+  id: string;
+  name: string;
+  imageUrl: string;
+  price: string
+}
+
 export default function Home({ products }: HomeProps) {
+  const { addItem } = useShoppingCart()
+
   const [sliderRef] = useKeenSlider({
     slides:{
       perView: 3,
@@ -28,8 +38,8 @@ export default function Home({ products }: HomeProps) {
     }
   })
 
-  function handleAddNewProduct(){
-    console.log('Adicionar')
+  function handleAddNewProduct(product: Product) {
+    addItem(product)
   }
 
   return (
@@ -48,7 +58,7 @@ export default function Home({ products }: HomeProps) {
                     <strong>{product.name}</strong>
                     <span>{product.price}</span>
                   </div>
-                  <CheckoutButton variant="secondary" size="lg" onClick={handleAddNewProduct}/>
+                  <CheckoutButton variant="secondary" size="lg" onClick={() => handleAddNewProduct(product)}/>
                 </footer>
               </Product>
             </Link>

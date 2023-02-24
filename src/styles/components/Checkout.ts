@@ -3,7 +3,7 @@ import { RxCross1 } from 'react-icons/rx'
 
 export const CheckoutContainer = styled('div',{
     height: '100%',
-    width: '29,6875rem',
+    width: '29.6875rem',
     backgroundColor: '$gray800',
     position: 'absolute',
     right: '0',

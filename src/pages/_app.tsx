@@ -7,6 +7,7 @@ import Image from 'next/image'
 import { CheckoutButton } from '../components/CheckoutButton'
 import { Checkout } from '../components/Checkout'
 import { useState } from 'react'
+import { CartProvider } from 'use-shopping-cart'
 
 globalStyles() // its better here
 
@@ -19,12 +20,24 @@ export default function App({ Component, pageProps }: AppProps) {
 
   return (
     <Container>
-      <Header>
-        <Image src={logoImg} alt=""/>
-        <CheckoutButton onClick={changeCheckOutStatus}/>
-      </Header>
-      <Checkout isToggled={isCheckoutOpened} onClick={changeCheckOutStatus}/>
-      <Component {...pageProps} />
+      <CartProvider
+        mode="payment"
+        cartMode="client-only"
+        stripe={process.env.STRIPE_PUBLIC_KEY!}
+        successUrl="stripe.com"
+        cancelUrl="twitter.com/dayhaysoos"
+        currency="BRL"
+        allowedCountries={['BR, PT']}
+        billingAddressCollection={true}
+        shouldPersist
+      >
+        <Header>
+          <Image src={logoImg} alt=""/>
+          <CheckoutButton onClick={changeCheckOutStatus}/>
+        </Header>
+        <Checkout isToggled={isCheckoutOpened} onClick={changeCheckOutStatus}/>
+        <Component {...pageProps} />
+      </CartProvider>
     </Container>
   ) 
 }

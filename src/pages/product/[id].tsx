@@ -6,6 +6,7 @@ import Head from "next/head"
 import Image from "next/image"
 import { useRouter } from "next/router"
 import { useState } from "react"
+import { useShoppingCart } from 'use-shopping-cart'
 import Stripe from "stripe"
 import { ImageContainer, ProductContainer, ProductDetails } from "../../styles/pages/products"
 
@@ -23,21 +24,24 @@ interface ProductProps{
 export default function Product({product}: ProductProps) {
     const { isFallback } = useRouter()
 
-    const [ isCreatingCheckoutSession, setIsCreatingCheckoutSession] = useState(false)
+    const { addItem } = useShoppingCart()
+
+    //const [ isCreatingCheckoutSession, setIsCreatingCheckoutSession] = useState(false)
     
     async function handleBuyProduct(){
-      try {
-        setIsCreatingCheckoutSession(true)
-        const response = await axios.post('/api/checkout', {
-          priceId: product.defaultPriceId,
-        })
-        const { checkoutUrl } = response.data
-        window.location.href = checkoutUrl
-      } catch (err) {
-        setIsCreatingCheckoutSession(false)
+      addItem(product)
+  //try {
+  //  setIsCreatingCheckoutSession(true)
+  //  const response = await axios.post('/api/checkout', {
+  //    priceId: product.defaultPriceId,
+  //  })
+  //  const { checkoutUrl } = response.data
+  //  window.location.href = checkoutUrl
+  //} catch (err) {
+  //  setIsCreatingCheckoutSession(false)
 
-        alert('Falha ao redirecionar ao checkout!')
-      } 
+  //  alert('Falha ao redirecionar ao checkout!')
+  //} 
     }
 
     if(isFallback) {
@@ -59,13 +63,13 @@ export default function Product({product}: ProductProps) {
 
             <p>{product.description}</p>
 
-            <Button title="Colocar na sacola" disabled={isCreatingCheckoutSession} onClick={handleBuyProduct}>Comprar agora</Button>
+            <Button title="Colocar na sacola" onClick={handleBuyProduct}>Comprar agora</Button>
           </ProductDetails>
         </ProductContainer>
       </>
     )
   }
-
+  //<Button title="Colocar na sacola" disabled={isCreatingCheckoutSession} onClick={handleBuyProduct}>Comprar agora</Button>
   export const getStaticPaths: GetStaticPaths = async() => {
     return{
       paths: [
