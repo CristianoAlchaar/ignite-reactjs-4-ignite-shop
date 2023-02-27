@@ -15,9 +15,10 @@ interface ProductProps{
     id: string
     name: string
     imageUrl: string
-    price: string
+    price: number
     description: string
     defaultPriceId: string
+    priceWithoutFormat: number
   }
 }
 
@@ -26,22 +27,15 @@ export default function Product({product}: ProductProps) {
 
     const { addItem } = useShoppingCart()
 
-    //const [ isCreatingCheckoutSession, setIsCreatingCheckoutSession] = useState(false)
-    
     async function handleBuyProduct(){
-      addItem(product)
-  //try {
-  //  setIsCreatingCheckoutSession(true)
-  //  const response = await axios.post('/api/checkout', {
-  //    priceId: product.defaultPriceId,
-  //  })
-  //  const { checkoutUrl } = response.data
-  //  window.location.href = checkoutUrl
-  //} catch (err) {
-  //  setIsCreatingCheckoutSession(false)
-
-  //  alert('Falha ao redirecionar ao checkout!')
-  //} 
+      addItem({
+        id: product.id,
+        name: product.name,
+        imageUrl: product.imageUrl,
+        price: product.priceWithoutFormat,
+        price_id: product.defaultPriceId,
+        currency: 'BRL', 
+      })
     }
 
     if(isFallback) {
@@ -69,7 +63,7 @@ export default function Product({product}: ProductProps) {
       </>
     )
   }
-  //<Button title="Colocar na sacola" disabled={isCreatingCheckoutSession} onClick={handleBuyProduct}>Comprar agora</Button>
+
   export const getStaticPaths: GetStaticPaths = async() => {
     return{
       paths: [
@@ -99,7 +93,8 @@ export default function Product({product}: ProductProps) {
             currency: 'BRL'
           }).format(price.unit_amount != null ? price.unit_amount / 100 : 0), //made that thernary condition here
           description: product.description,
-          defaultPriceId: price.id
+          defaultPriceId: price.id,
+          priceWithoutFormat: price.unit_amount,
         }
       },
       //revalidate: 60 * 60 * 1 //1 hour

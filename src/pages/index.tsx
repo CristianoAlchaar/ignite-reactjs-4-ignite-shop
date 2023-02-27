@@ -14,11 +14,12 @@ import { useShoppingCart } from "use-shopping-cart"
 
 interface HomeProps{
   products: {
-    id: string,
-    name: string,
-    imageUrl: string,
-    price: string,
-    priceId: string,
+    id: string
+    name: string
+    imageUrl: string
+    price: string
+    priceId: string
+    priceWithoutFormat: number
   }[]
 }
 
@@ -28,6 +29,7 @@ interface TypeProductToBeAdded{
   imageUrl: string
   price: string
   priceId: string
+  priceWithoutFormat: number
 }
 
 export default function Home({ products }: HomeProps) {
@@ -45,7 +47,7 @@ export default function Home({ products }: HomeProps) {
       id: product.priceId,
       name: product.name,
       imageUrl: product.imageUrl,
-      price: product.price,
+      price: product.priceWithoutFormat,
       price_id: product.priceId,
       currency: 'BRL',     
     })
@@ -94,6 +96,7 @@ export const getStaticProps: GetStaticProps = async () => {
         style: 'currency',
         currency: 'BRL'
       }).format(price.unit_amount! / 100),
+      priceWithoutFormat: price.unit_amount,
       priceId: price.id,
     }
   })

@@ -10,8 +10,7 @@ interface CheckoutProps{
 }
 
 export function Checkout({ isToggled = false, onClick } : CheckoutProps){
-    const { cartDetails, cartCount, redirectToCheckout } = useShoppingCart()
-    const [chartTotalPrice, setChartTotalPrice] = useState('0')
+    const { cartDetails, cartCount, redirectToCheckout, totalPrice } = useShoppingCart()
 
     const [ isLoading, setIsLoading ] = useState(false)
     const [status, setStatus] = useState('idle')
@@ -21,7 +20,7 @@ export function Checkout({ isToggled = false, onClick } : CheckoutProps){
     }
 
     async function handleBuyClick(){
-        if (cartCount > 0) {
+        if (cartCount! > 0) {
             setStatus('idle')
             try {
               setIsLoading(true)
@@ -34,30 +33,13 @@ export function Checkout({ isToggled = false, onClick } : CheckoutProps){
               console.error(error)
               setStatus('redirect-error')
             } finally{
-                setStatus(false)
+                setIsLoading(false)
             }
         } else {
             setStatus('missing-items')
         }
     }
 
-    function changeTotalPrice(){
-        if(cartDetails){
-            const totalPrice = Object.values(cartDetails).reduce((total, product) => {
-            const price = Number(product.price.replace('R$', '').replace(',', '.'))
-            return total + (price * product.quantity); // multiply the price by the quantity and add it to the total
-            }, 0);
-
-            setChartTotalPrice(totalPrice.toFixed(2))
-        }else{
-            setChartTotalPrice('0.00')
-        } 
-      }
-    
-      useEffect(() => {
-        changeTotalPrice()
-      }, [cartDetails])
-      
     return(
         <CheckoutContainer style={isToggled ? { right: 0 } : { right: '-485px' }}>
             <ExitButton onClick={handleExitClick}/> 
@@ -68,7 +50,7 @@ export function Checkout({ isToggled = false, onClick } : CheckoutProps){
                 {cartDetails 
                     && Object.values(cartDetails).map(product => (
                         <SmallProducCard 
-                            price={product.price} 
+                            price={product.formattedValue} 
                             quantity={product.quantity} 
                             title={product.name} 
                             key={product.id}
@@ -85,7 +67,7 @@ export function Checkout({ isToggled = false, onClick } : CheckoutProps){
                 </div>
                 <div>
                     <TotalPrice>Valor total</TotalPrice>
-                    <TotalPriceValue>R$ {chartTotalPrice}</TotalPriceValue>
+                    <TotalPriceValue>R$ {(totalPrice! / 100).toFixed(2)}</TotalPriceValue>
                 </div>
                 {isLoading ? 
                     <Button title='Finalizar compra' disabled onClick={() => handleBuyClick()}/> :
