@@ -24,7 +24,7 @@ export default function App({ Component, pageProps }: AppProps) {
         cartMode="client-only"
         stripe={process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY!}
         successUrl="http://localhost:3000/success"
-        cancelUrl="http://localhost:3000/"
+        cancelUrl="http://localhost:3000/canceled"
         currency="BRL"
         allowedCountries={['BR']}
         billingAddressCollection={false}

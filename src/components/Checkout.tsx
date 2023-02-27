@@ -13,6 +13,7 @@ export function Checkout({ isToggled = false, onClick } : CheckoutProps){
     const { cartDetails, cartCount, redirectToCheckout } = useShoppingCart()
     const [chartTotalPrice, setChartTotalPrice] = useState('0')
 
+    const [ isLoading, setIsLoading ] = useState(false)
     const [status, setStatus] = useState('idle')
 
     function handleExitClick(){
@@ -23,6 +24,7 @@ export function Checkout({ isToggled = false, onClick } : CheckoutProps){
         if (cartCount > 0) {
             setStatus('idle')
             try {
+              setIsLoading(true)
               const result = await redirectToCheckout()
               if (result?.error) {
                 console.error(result)
@@ -31,10 +33,12 @@ export function Checkout({ isToggled = false, onClick } : CheckoutProps){
             } catch (error) {
               console.error(error)
               setStatus('redirect-error')
+            } finally{
+                setStatus(false)
             }
-          } else {
+        } else {
             setStatus('missing-items')
-          }
+        }
     }
 
     function changeTotalPrice(){
@@ -83,7 +87,10 @@ export function Checkout({ isToggled = false, onClick } : CheckoutProps){
                     <TotalPrice>Valor total</TotalPrice>
                     <TotalPriceValue>R$ {chartTotalPrice}</TotalPriceValue>
                 </div>
-                <Button title='Finalizar compra' onClick={() => handleBuyClick()}/>
+                {isLoading ? 
+                    <Button title='Finalizar compra' disabled onClick={() => handleBuyClick()}/> :
+                    <Button title='Finalizar compra' onClick={() => handleBuyClick()} />
+                }
             </footer>
         </CheckoutContainer>
     )
