@@ -9,6 +9,10 @@ Ignite Shop is an e-commerce project built with Next.js, StitchesJS, Stripe API,
 - Checkout bar for a smoother checkout experience
 - Responsive design using `stitches`
 
+## Demo
+
+You can see a live demo of this project at [https://ignite-reactjs-4-ignite-shop.vercel.app/](https://ignite-reactjs-4-ignite-shop.vercel.app/). 
+
 ## Usage
 
 1. Clone this repository to your local machine.
