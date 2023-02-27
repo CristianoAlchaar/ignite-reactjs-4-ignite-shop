@@ -16,9 +16,9 @@ You can see a live demo of this project at [https://ignite-reactjs-4-ignite-shop
 ## Usage
 
 1. Clone this repository to your local machine.
-2. Create a `.env.local` file in the root directory of the project with the following variables:
-    NEXT_PUBLIC_STRIPE_PUBLIC_KEY=<your Stripe public key>
-    STRIPE_SECRET_KEY=<your Stripe secret key>
+2. Create a `.env.local` file in the root directory of the project with the following variables:<br>
+    NEXT_PUBLIC_STRIPE_PUBLIC_KEY=<your Stripe public key><br>
+    STRIPE_SECRET_KEY=<your Stripe secret key><br>
     NEXT_PUBLIC_URL=http://localhost:3000
 3. Run `npm install` to install dependencies.
 4. Run `npm run dev` to start the development server.
