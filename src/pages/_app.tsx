@@ -17,18 +17,17 @@ export default function App({ Component, pageProps }: AppProps) {
   function changeCheckOutStatus(){
     isCheckoutOpened ? setIsCheckoutOpened(false) : setIsCheckoutOpened(true)
   }
-
   return (
     <Container>
       <CartProvider
         mode="payment"
         cartMode="client-only"
-        stripe={process.env.STRIPE_PUBLIC_KEY!}
-        successUrl="stripe.com"
-        cancelUrl="twitter.com/dayhaysoos"
+        stripe={process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY!}
+        successUrl="http://localhost:3000/success"
+        cancelUrl="http://localhost:3000/"
         currency="BRL"
-        allowedCountries={['BR, PT']}
-        billingAddressCollection={true}
+        allowedCountries={['BR']}
+        billingAddressCollection={false}
         shouldPersist
       >
         <Header>

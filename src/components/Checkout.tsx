@@ -10,15 +10,31 @@ interface CheckoutProps{
 }
 
 export function Checkout({ isToggled = false, onClick } : CheckoutProps){
-    const { cartDetails, cartCount } = useShoppingCart()
+    const { cartDetails, cartCount, redirectToCheckout } = useShoppingCart()
     const [chartTotalPrice, setChartTotalPrice] = useState('0')
+
+    const [status, setStatus] = useState('idle')
 
     function handleExitClick(){
         onClick()
     }
 
-    function handleBuyClick(){
-        console.log(cartDetails)
+    async function handleBuyClick(){
+        if (cartCount > 0) {
+            setStatus('idle')
+            try {
+              const result = await redirectToCheckout()
+              if (result?.error) {
+                console.error(result)
+                setStatus('redirect-error')
+              }
+            } catch (error) {
+              console.error(error)
+              setStatus('redirect-error')
+            }
+          } else {
+            setStatus('missing-items')
+          }
     }
 
     function changeTotalPrice(){
@@ -67,7 +83,7 @@ export function Checkout({ isToggled = false, onClick } : CheckoutProps){
                     <TotalPrice>Valor total</TotalPrice>
                     <TotalPriceValue>R$ {chartTotalPrice}</TotalPriceValue>
                 </div>
-                <Button title='Finalizar compra' onClick={handleBuyClick}/>
+                <Button title='Finalizar compra' onClick={() => handleBuyClick()}/>
             </footer>
         </CheckoutContainer>
     )

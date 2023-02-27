@@ -91,7 +91,7 @@ export default function Product({product}: ProductProps) {
     return{
       props:{
         product: {
-          id: product.id,
+          id: price.id,
           name: product.name,
           imageUrl: product.images[0],
           price: new Intl.NumberFormat('pt-BR', {

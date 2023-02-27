@@ -18,14 +18,16 @@ interface HomeProps{
     name: string,
     imageUrl: string,
     price: string,
+    priceId: string,
   }[]
 }
 
-interface Product{
-  id: string;
-  name: string;
-  imageUrl: string;
+interface TypeProductToBeAdded{
+  id: string
+  name: string
+  imageUrl: string
   price: string
+  priceId: string
 }
 
 export default function Home({ products }: HomeProps) {
@@ -38,8 +40,15 @@ export default function Home({ products }: HomeProps) {
     }
   })
 
-  function handleAddNewProduct(product: Product) {
-    addItem(product)
+  function handleAddNewProduct(product: TypeProductToBeAdded) {
+    addItem({
+      id: product.priceId,
+      name: product.name,
+      imageUrl: product.imageUrl,
+      price: product.price,
+      price_id: product.priceId,
+      currency: 'BRL',     
+    })
   }
 
   return (
@@ -85,6 +94,7 @@ export const getStaticProps: GetStaticProps = async () => {
         style: 'currency',
         currency: 'BRL'
       }).format(price.unit_amount! / 100),
+      priceId: price.id,
     }
   })
 
