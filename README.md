@@ -15,6 +15,7 @@ Ignite Shop is an e-commerce project built with Next.js, StitchesJS, Stripe API,
 2. Create a `.env.local` file in the root directory of the project with the following variables:
     NEXT_PUBLIC_STRIPE_PUBLIC_KEY=<your Stripe public key>
     STRIPE_SECRET_KEY=<your Stripe secret key>
+    NEXT_PUBLIC_URL=http://localhost:3000
 3. Run `npm install` to install dependencies.
 4. Run `npm run dev` to start the development server.
 5. Open `http://localhost:3000` in your browser to view the project.

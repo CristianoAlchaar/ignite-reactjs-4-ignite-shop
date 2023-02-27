@@ -16,15 +16,15 @@ export default function App({ Component, pageProps }: AppProps) {
 
   function changeCheckOutStatus(){
     isCheckoutOpened ? setIsCheckoutOpened(false) : setIsCheckoutOpened(true)
-  }
+  } 
   return (
     <Container>
       <CartProvider
         mode="payment"
         cartMode="client-only"
         stripe={process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY!}
-        successUrl="http://localhost:3000/success"
-        cancelUrl="http://localhost:3000/canceled"
+        successUrl={`${process.env.NEXT_PUBLIC_URL}/success`}
+        cancelUrl={`${process.env.NEXT_PUBLIC_URL}/canceled`}
         currency="BRL"
         allowedCountries={['BR']}
         billingAddressCollection={false}
