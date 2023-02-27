@@ -47,6 +47,8 @@ export default function Home({ products }: HomeProps) {
       id: product.priceId,
       name: product.name,
       imageUrl: product.imageUrl,
+      //useShoppingCart works better with price without 
+      //format, by default is decimal, example 74,90 is 7490 without format
       price: product.priceWithoutFormat,
       price_id: product.priceId,
       currency: 'BRL',     
